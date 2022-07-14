@@ -1,0 +1,16 @@
+.container {
+  width: 20rem;
+  height: 3rem;
+  margin-top: 0.5rem;
+  border-radius: 3rem;
+  background-color: var(--lilac-800);
+  border: none;
+  color: var(--white);
+  transition: all 0.3s;
+  text-transform: uppercase;
+  letter-spacing: 0.2rem;
+
+  &:hover {
+    background-color: var(--lilac-900);
+  }
+}
