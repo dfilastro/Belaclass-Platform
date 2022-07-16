@@ -1,18 +1,24 @@
-import type { NextPage } from 'next';
 import Head from 'next/head';
+import { useUser } from '@auth0/nextjs-auth0';
 
 import styles from './home.module.scss';
 
-const Home: NextPage = () => {
-  return (
-    <>
-      <Head>
-        <title>Bela Class | By Gabriela Negro</title>
-      </Head>
+export default function Home() {
+  const { user, error, isLoading } = useUser();
 
-      <main className={styles.contentContainer}>Hello World</main>
-    </>
-  );
-};
+  if (user) {
+    return (
+      <>
+        <Head>
+          <title>Bela Class | By Gabriela Negro</title>
+        </Head>
 
-export default Home;
+        <div>
+          Welcome {user.name}! <a href='/api/auth/logout'>Logout</a>
+        </div>
+
+        {/* <main className={styles.contentContainer}>Hello World</main> */}
+      </>
+    );
+  }
+}
