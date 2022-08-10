@@ -1,26 +1,51 @@
-import { ButtonSubmit } from '../../components/ButtonSubmit';
+// import { ButtonSubmit } from '../../components/ButtonSubscription';
 import styles from './styles.module.scss';
 import Image from 'next/image';
-import bannerImg from '../../../public/pngwing.com.png';
-import bannerImg2 from '../../../public/image2.png';
+import { FormEvent, useContext, useState } from 'react';
+import { AuthContext } from '../../contexts/AuthContext';
 
 export default function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const { signIn } = useContext(AuthContext);
+
+  async function handleSubmit(event: FormEvent) {
+    event.preventDefault();
+
+    const data = {
+      email,
+      password,
+    };
+
+    await signIn(data);
+  }
+
   return (
     <div className={styles.container}>
-      <section className={styles.loginContainer}>
+      <form onSubmit={handleSubmit} className={styles.loginContainer}>
         <p>Welcome</p>
         <div>
-          <input type='email' placeholder='Usuário' />
+          <input
+            type='email'
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder='Usuário'
+          />
         </div>
         <div>
-          <input type='password' placeholder='Senha' />
+          <input
+            type='password'
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder='Senha'
+          />
         </div>
         <a>Esqueceu a senha?</a>
-
-        <ButtonSubmit />
-      </section>
+        <button type='submit'>Entrar</button>
+      </form>
       <div className={styles.bannerContainer}>
-        <Image src={bannerImg2} className={styles.imageContainer} height='650rem' width='350rem' />
+        <Image src='/image2.png' className={styles.imageContainer} height='650rem' width='350rem' />
       </div>
     </div>
   );

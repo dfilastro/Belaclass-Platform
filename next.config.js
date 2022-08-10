@@ -5,6 +5,6 @@ const nextConfig = {
 
 module.exports = {
   images: {
-    domains: ['localhost', 's.gravatar.com'],
+    domains: ['localhost', 's.gravatar.com', '.png'],
   },
 };
